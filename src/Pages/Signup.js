@@ -3,20 +3,42 @@ import Account from '../Components/Account';
 import Personal from '../Components/Personal';
 import Image from '../Components/Image';
 import Finish from '../Components/Finish';
+import Button from '../Components/Button';
 
 const Signup = () => {
-    const [width, setWidth] = useState(25);
 
-    const next = () => {
+    const [step, setStep] = useState(1);
+    const [width, setWidth] = useState(25);
+    const [formData, setFormData] = useState({});
+
+    const nextStep = () => {
+        setStep(step + 1);
         if (width < 100) {
             setWidth(width + 25);
         }
     };
 
-    const previous = () => {
+    const prevStep = () => {
+        setStep(step - 1);
         if (width > 25) {
             setWidth(width - 25);
         }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    const submitForm = () => {
+        console.log('Form submitted'); // you can add form submission logic here
+        console.log(formData); // Log form data in JSON format
+        setStep(4);
+        setWidth(100);
+
+    }
+
+    const updateFormData = (data) => {
+        setFormData({ ...formData, ...data });
     };
 
     return (
@@ -36,16 +58,30 @@ const Signup = () => {
                     </div>
                 </div>
 
-                <form className='mt-6'>
-                    {/* components */}
-                    <Account />
-                    <Personal/>
-                    <Image/>
-                    <Finish/>
+                <form className='mt-6' onSubmit={handleSubmit}>
+                    {/* ------------------components------------------------- */}
+                    {step === 1 && <Account />}
+                    {step === 2 && <Personal />}
+                    {step === 3 && <Image />}
+                    {step === 4 && <Finish />}
 
+                    {/* ------------------Button Section------------------- */}
                     <div className='mt-10 mb-10 space-y-6'>
-                        <button type="submit" className="bg-neutral-200 hover:bg-[#34AC26] focus:outline-none font-bold rounded-lg text-lg w-full px-5 py-2 text-center" onClick={next}>Next</button>
-                        <button type="submit" className="bg-neutral-200 hover:bg-[#34AC26] focus:outline-none font-bold rounded-lg text-lg w-full px-5 py-2 text-center" onClick={previous}>Previous</button>
+                        {step === 1 && (
+                            <Button name='Next' onClick={nextStep} />
+                        )}
+                        {step === 2 && (
+                            <>
+                                <Button name='Next' onClick={nextStep} />
+                                <Button name='Previous' onClick={prevStep} />
+                            </>
+                        )}
+                        {step === 3 && (
+                            <>
+                                <Button name='Submit' onClick={submitForm} />
+                                <Button name='Previous' onClick={prevStep} />
+                            </>
+                        )}
                     </div>
                 </form>
             </div>
