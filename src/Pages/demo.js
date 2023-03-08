@@ -3,48 +3,19 @@ import Account from '../Components/Account';
 import Personal from '../Components/Personal';
 import Image from '../Components/Image';
 import Finish from '../Components/Finish';
-import Button from '../Components/Button';
 
 const Signup = () => {
     const [width, setWidth] = useState(25);
-    const [page, setPage] = useState(0);
-    const [formData, setFormData] = useState({
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-        firstName: "",
-        lastName: "",
-        contact: "",
-        alternateContact: "",
-    });
 
-    const nextStep = () => {
-        setPage(page + 1);
+    const next = () => {
         if (width < 100) {
             setWidth(width + 25);
         }
     };
 
-    const prevStep = () => {
-        setPage(page - 1);
+    const previous = () => {
         if (width > 25) {
             setWidth(width - 25);
-        }
-    };
-
-    const pageDisplay = () => {
-        if (page === 0) {
-            return (<Account formData={formData} setFormData={setFormData} />)
-        }
-        else if (page === 1) {
-            return (<Personal formData={formData} setFormData={setFormData} />)
-        }
-        else if (page === 2) {
-            return (<Image formData={formData} setFormData={setFormData} />)
-        }
-        else {
-            return (<Finish />)
         }
     };
 
@@ -67,16 +38,14 @@ const Signup = () => {
 
                 <form className='mt-6'>
                     {/* components */}
-                    <div>{pageDisplay()}</div>
+                    <Account />
+                    <Personal/>
+                    <Image/>
+                    <Finish/>
 
                     <div className='mt-10 mb-10 space-y-6'>
-                        {
-                            page < 3 ? <Button onClick={nextStep}>{page === 2 ? 'Submit' : 'Next'}</Button> : null
-                        }
-
-                        {
-                            page > 0 && page < 3 ? <Button onClick={prevStep}>Previous</Button> : null
-                        }
+                        <button type="submit" className="bg-neutral-200 hover:bg-[#34AC26] focus:outline-none font-bold rounded-lg text-lg w-full px-5 py-2 text-center" onClick={next}>Next</button>
+                        <button type="submit" className="bg-neutral-200 hover:bg-[#34AC26] focus:outline-none font-bold rounded-lg text-lg w-full px-5 py-2 text-center" onClick={previous}>Previous</button>
                     </div>
                 </form>
             </div>
