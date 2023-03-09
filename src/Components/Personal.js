@@ -23,14 +23,14 @@ const Personal = ({ formData, setFormData }) => {
             </div>
             <div className="mb-6">
                 <label for="number" className="block mb-2 text-md font-medium text-gray-900 dark:text-white text-left">Contact No.: <span className='text-rose-600'>*</span></label>
-                <input type="number" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contact No." required
+                <input type="tel" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contact No." required
                     value={formData.contact}
                     onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
                 />
             </div>
             <div className="mb-6">
                 <label for="Alternate Contact No." className="block mb-2 text-md font-medium text-gray-900 dark:text-white text-left">Alternate Contact No.: <span className='text-rose-600'>*</span></label>
-                <input type="number" id="alt-number" className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alternate Contact No." required
+                <input type="tel" id="alt-number" className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alternate Contact No." required
                     value={formData.alternateContact}
                     onChange={(e) => setFormData({ ...formData, alternateContact: e.target.value })}
                 />
