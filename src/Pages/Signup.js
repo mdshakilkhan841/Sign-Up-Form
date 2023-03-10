@@ -41,7 +41,7 @@ const Signup = (props) => {
         })
 
         const sign = imageUpload.signature ;
-        const signRef =ref(storage, `signatures/${sign.name}` );
+        const signRef =ref(storage, `signatures/${sign.name + v4()}` );
         uploadBytes(signRef, sign).then(() => {
             // alert('Sign Uploaded');
         })
