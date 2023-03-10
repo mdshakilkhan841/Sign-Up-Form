@@ -7,6 +7,8 @@ import Button from '../Components/Button';
 import Header from '../Components/Header';
 import { addDoc } from 'firebase/firestore';
 import { storage, formRef } from '../Firebase/firebase.js';
+import { ref, uploadBytes } from 'firebase/storage';
+import { v4 } from 'uuid';
 
 const Signup = (props) => {
     const [width, setWidth] = useState(25);
@@ -31,18 +33,19 @@ const Signup = (props) => {
         await addDoc(formRef, formData);
     }
     //For Images
-    const addImage = async () => {
-        const fileImg = imageUpload.image;
-        const fileRef = storage.ref().child(`images/${fileImg.name}`);
-        await fileRef.put(fileImg);
-        const imageURL = await fileRef.getDownloadURL();
-        setImageUpload({...imageUpload,image: imageURL});
-        const signatureImg = imageUpload.signature;
-        const signatureRef = storage.ref().child(`signatures/${signatureImg.name}`);
-        await signatureRef.put(signatureImg);
-        const signatureURL = await signatureRef.getDownloadURL();
-        setImageUpload({...imageUpload,signature: signatureURL});
-    }
+    const addImage = () => {
+        const image = imageUpload.image ;
+        const imgRef =ref(storage, `images/${image.name + v4()}` );
+        uploadBytes(imgRef, image).then(() => {
+            alert('Image Uploaded');
+        })
+
+        const sign = imageUpload.signature ;
+        const signRef =ref(storage, `signatures/${sign.name}` );
+        uploadBytes(signRef, sign).then(() => {
+            alert('Sign Uploaded');
+        })
+    };
 
 
     //------ Next Button Function ------//
