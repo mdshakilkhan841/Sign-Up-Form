@@ -37,13 +37,13 @@ const Signup = (props) => {
         const image = imageUpload.image ;
         const imgRef =ref(storage, `images/${image.name + v4()}` );
         uploadBytes(imgRef, image).then(() => {
-            alert('Image Uploaded');
+            // alert('Image Uploaded');
         })
 
         const sign = imageUpload.signature ;
         const signRef =ref(storage, `signatures/${sign.name}` );
         uploadBytes(signRef, sign).then(() => {
-            alert('Sign Uploaded');
+            // alert('Sign Uploaded');
         })
     };
 
